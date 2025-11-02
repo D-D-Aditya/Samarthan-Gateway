@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Samarthan Gateway | Secure Donations</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Razorpay Checkout Script -->
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800">
+
+    <!-- Header -->
+    <header class="bg-white shadow-md sticky top-0 z-50">
+        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="#" class="text-2xl font-bold text-teal-600">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="inline-block h-8 w-8 -mt-1"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"></path></svg>
+                Samarthan Gateway
+            </a>
+            <a href="admin_dashboard.html" target="_blank" class="bg-gray-200 hover:bg-gray-300 text-gray-700 font-semibold px-4 py-2 rounded-lg transition duration-300 shadow-sm text-sm">
+                Admin Login
+            </a>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Donation Section -->
+        <section id="donate" class="py-20">
+            <div class="container mx-auto px-6">
+                 <div class="text-center mb-12">
+                    <h2 class="text-3xl md:text-4xl font-bold text-gray-800">Make a Donation</h2>
+                    <p class="mt-4 text-gray-600 max-w-2xl mx-auto">Every contribution, no matter the size, helps us continue our work.</p>
+                </div>
+                <div class="max-w-2xl mx-auto bg-white p-8 rounded-lg shadow-xl">
+                    <form id="donation-form" class="space-y-6">
+                        <div>
+                            <label for="donor-name" class="block text-sm font-medium text-gray-700">Full Name</label>
+                            <input type="text" id="donor-name" name="donor-name" required class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-teal-500 focus:border-teal-500">
+                        </div>
+                        <div>
+                            <label for="donor-email" class="block text-sm font-medium text-gray-700">Email Address</label>
+                            <input type="email" id="donor-email" name="donor-email" required class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-teal-500 focus:border-teal-500">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700">Amount (INR)</label>
+                            <div class="mt-2 grid grid-cols-2 sm:grid-cols-4 gap-4">
+                                <button type="button" data-amount="100" class="amount-btn bg-gray-200 hover:bg-teal-500 hover:text-white rounded-md py-3 font-semibold transition">₹100</button>
+                                <button type="button" data-amount="250" class="amount-btn bg-gray-200 hover:bg-teal-500 hover:text-white rounded-md py-3 font-semibold transition">₹250</button>
+                                <button type="button" data-amount="500" class="amount-btn bg-gray-200 hover:bg-teal-500 hover:text-white rounded-md py-3 font-semibold transition">₹500</button>
+                                <button type="button" data-amount="1000" class="amount-btn bg-gray-200 hover:bg-teal-500 hover:text-white rounded-md py-3 font-semibold transition">₹1000</button>
+                            </div>
+                             <input type="number" id="custom-amount" name="custom-amount" placeholder="Or enter a custom amount" class="mt-4 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-teal-500 focus:border-teal-500">
+                        </div>
+                        <div>
+                            <label for="cause-select" class="block text-sm font-medium text-gray-700">Donate to a Specific Cause</label>
+                            <select id="cause-select" name="cause-select" class="mt-1 block w-full px-3 py-2 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-teal-500 focus:border-teal-500">
+                                <option>Loading causes...</option>
+                            </select>
+                        </div>
+                        <button type="submit" id="donate-btn" class="w-full bg-teal-500 hover:bg-teal-600 text-white font-bold text-lg py-3 rounded-lg transition duration-300 shadow-lg flex items-center justify-center">
+                            <span id="donate-btn-text">Donate Now</span>
+                            <svg id="loading-spinner" class="animate-spin -ml-1 mr-3 h-5 w-5 text-white hidden" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <!-- Causes Section -->
+        <section id="causes" class="py-20 bg-white">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl md:text-4xl font-bold text-gray-800">Our Causes</h2>
+                    <p class="mt-4 text-gray-600 max-w-2xl mx-auto">Your donation directly supports these vital initiatives. See the impact you can make.</p>
+                </div>
+                <div id="causes-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- SKELETON LOADER -->
+                    <div class="bg-white p-6 rounded-lg shadow-md animate-pulse">
+                        <div class="h-16 w-16 bg-gray-200 rounded-full mb-4"></div>
+                        <div class="h-6 bg-gray-200 rounded w-3/4 mb-2"></div>
+                        <div class="h-4 bg-gray-200 rounded w-full mb-4"></div>
+                        <div class="h-4 bg-gray-200 rounded w-5/6 mb-4"></div>
+                        <div class="h-2.5 bg-gray-200 rounded-full w-full"></div>
+                        <div class="flex justify-between mt-2">
+                            <div class="h-4 bg-gray-200 rounded w-1/3"></div>
+                            <div class="h-4 bg-gray-200 rounded w-1/4"></div>
+                        </div>
+                    </div>
+                     <div class="bg-white p-6 rounded-lg shadow-md animate-pulse hidden md:block">
+                        <div class="h-16 w-16 bg-gray-200 rounded-full mb-4"></div>
+                        <div class="h-6 bg-gray-200 rounded w-3/4 mb-2"></div>
+                        <div class="h-4 bg-gray-200 rounded w-full mb-4"></div>
+                        <div class="h-4 bg-gray-200 rounded w-5/6 mb-4"></div>
+                        <div class="h-2.5 bg-gray-200 rounded-full w-full"></div>
+                        <div class="flex justify-between mt-2">
+                            <div class="h-4 bg-gray-200 rounded w-1/3"></div>
+                            <div class="h-4 bg-gray-200 rounded w-1/4"></div>
+                        </div>
+                    </div>
+                     <div class="bg-white p-6 rounded-lg shadow-md animate-pulse hidden lg:block">
+                        <div class="h-16 w-16 bg-gray-200 rounded-full mb-4"></div>
+                        <div class="h-6 bg-gray-200 rounded w-3/4 mb-2"></div>
+                        <div class="h-4 bg-gray-200 rounded w-full mb-4"></div>
+                        <div class="h-4 bg-gray-200 rounded w-5/6 mb-4"></div>
+                        <div class="h-2.5 bg-gray-200 rounded-full w-full"></div>
+                        <div class="flex justify-between mt-2">
+                            <div class="h-4 bg-gray-200 rounded w-1/3"></div>
+                            <div class="h-4 bg-gray-200 rounded w-1/4"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-10">
+        <div class="container mx-auto px-6 text-center">
+            <p>&copy; 2025 Samarthan Gateway.</p>
+        </div>
+    </footer>
+
+    <!-- Success Modal -->
+    <div id="success-modal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden z-50">
+        <div class="bg-white p-8 rounded-lg shadow-xl text-center max-w-sm mx-auto">
+            <div class="mx-auto flex items-center justify-center h-12 w-12 rounded-full bg-green-100">
+                 <svg class="h-6 w-6 text-green-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" /></svg>
+            </div>
+            <h3 class="text-lg leading-6 font-medium text-gray-900 mt-4">Thank You!</h3>
+            <div class="mt-2 px-7 py-3">
+                <p class="text-sm text-gray-500">Your donation has been recorded successfully. Your support is invaluable to our mission.</p>
+            </div>
+            <div class="items-center px-4 py-3">
+                <button id="close-modal-btn" class="px-4 py-2 bg-teal-500 text-white text-base font-medium rounded-md w-full shadow-sm hover:bg-teal-600 focus:outline-none focus:ring-2 focus:ring-teal-300">
+                    Close
+                </button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Import Firebase and Firestore modules -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+        import { getFirestore, collection, onSnapshot, query, doc, writeBatch, increment, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+        // --- TODO: PASTE YOUR FIREBASE CONFIGURATION HERE ---
+               
+        // --- End of Firebase Configuration ---
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
+        // --- PASTE YOUR RAZORPAY KEY ID HERE ---
+        const razorpayKeyId = '';
+        // --- End of Razorpay Configuration ---
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const causesContainer = document.getElementById('causes-container');
+            const causeSelect = document.getElementById('cause-select');
+            
+            function setupCausesListener() {
+                const causesQuery = query(collection(db, "causes"));
+                onSnapshot(causesQuery, (snapshot) => {
+                    const causeList = [];
+                    snapshot.forEach(doc => {
+                        causeList.push({ id: doc.id, ...doc.data() });
+                    });
+                    renderCausesUI(causeList);
+                }, (error) => {
+                    console.error("Error fetching real-time causes:", error);
+                    causesContainer.innerHTML = '<p class="text-center col-span-full text-red-500">Error loading causes.</p>';
+                });
+            }
+
+            function renderCausesUI(causeList) {
+                if (!causesContainer) return;
+                causesContainer.innerHTML = '';
+                causeSelect.innerHTML = '';
+
+                if (causeList.length === 0) {
+                    causesContainer.innerHTML = '<p class="text-center col-span-full">No active causes found.</p>';
+                    causeSelect.innerHTML = '<option>No causes available</option>';
+                    return;
+                }
+
+                causeList.forEach(cause => {
+                    if (cause.isActive) {
+                        const percentage = Math.round((cause.raisedAmount / cause.goalAmount) * 100);
+                        const causeCard = `
+                            <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300">
+                                 <div class="flex items-center justify-center w-16 h-16 bg-teal-100 rounded-full mb-4"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-8 h-8 text-teal-500"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div>
+                                <h3 class="text-xl font-bold mb-2">${cause.title}</h3>
+                                <p class="text-gray-600 mb-4">${cause.description}</p>
+                                <div class="w-full bg-gray-200 rounded-full h-2.5">
+                                    <div class="bg-teal-500 h-2.5 rounded-full" style="width: ${percentage > 100 ? 100 : percentage}%"></div>
+                                </div>
+                                <div class="flex justify-between items-center mt-2 text-sm">
+                                    <span class="font-semibold">Raised: ₹${cause.raisedAmount.toLocaleString()}</span>
+                                    <span class="text-gray-500">Goal: ₹${cause.goalAmount.toLocaleString()}</span>
+                                </div>
+                            </div>`;
+                        causesContainer.innerHTML += causeCard;
+                        
+                        const option = document.createElement('option');
+                        option.value = cause.id;
+                        option.textContent = cause.title;
+                        option.dataset.title = cause.title;
+                        causeSelect.appendChild(option);
+                    }
+                });
+
+                if (causeSelect.innerHTML === '') {
+                    causeSelect.innerHTML = '<option>No active causes available</option>';
+                }
+            }
+
+
+            const donationForm = document.getElementById('donation-form');
+            const amountBtns = document.querySelectorAll('.amount-btn');
+            const customAmountInput = document.getElementById('custom-amount');
+            const donateBtn = document.getElementById('donate-btn');
+            const donateBtnText = document.getElementById('donate-btn-text');
+            const loadingSpinner = document.getElementById('loading-spinner');
+            let selectedAmount = 0;
+
+            amountBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    amountBtns.forEach(b => b.classList.remove('bg-teal-500', 'text-white'));
+                    btn.classList.add('bg-teal-500', 'text-white');
+                    selectedAmount = parseInt(btn.dataset.amount);
+                    customAmountInput.value = '';
+                });
+            });
+
+            customAmountInput.addEventListener('input', () => {
+                amountBtns.forEach(b => b.classList.remove('bg-teal-500', 'text-white'));
+                selectedAmount = parseInt(customAmountInput.value) || 0;
+            });
+
+            donationForm.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                
+                if (razorpayKeyId === 'YOUR_RAZORPAY_KEY_ID' || !razorpayKeyId) {
+                    alert('Razorpay Key ID is not configured. Please contact the administrator.');
+                    return;
+                }
+
+                const formData = new FormData(donationForm);
+                const name = formData.get('donor-name');
+                const email = formData.get('donor-email');
+                const causeId = formData.get('cause-select');
+                const selectedOption = causeSelect.options[causeSelect.selectedIndex];
+                const causeTitle = selectedOption ? selectedOption.dataset.title : 'General Donation';
+                const amount = selectedAmount;
+
+                if (!name || !email || amount <= 0 || !causeId || !selectedOption) {
+                    alert('Please fill in all fields, select a valid cause, and select an amount.');
+                    return;
+                }
+                
+                donateBtn.disabled = true;
+                donateBtnText.textContent = 'Processing...';
+                loadingSpinner.classList.remove('hidden');
+
+                const donationData = {
+                    donorName: name,
+                    donorEmail: email,
+                    amount: amount,
+                    causeId: causeId,
+                    causeTitle: causeTitle,
+                    status: 'created',
+                    donatedAt: serverTimestamp()
+                };
+
+                var options = {
+                    "key": razorpayKeyId,
+                    "amount": amount * 100,
+                    "currency": "INR",
+                    "name": "Samarthan Gateway Donation",
+                    "description": `Donation for ${causeTitle}`,
+                    "handler": async function (response) {
+                        const paymentId = response.razorpay_payment_id;
+                        donationData.paymentId = paymentId;
+                        donationData.status = 'successful';
+                        
+                        try {
+                            // --- ATOMIC BATCHED WRITE ---
+                            const batch = writeBatch(db);
+
+                            // 1. Create a reference for the new donation document
+                            const donationRef = doc(collection(db, "donations"));
+                            batch.set(donationRef, donationData);
+
+                            // 2. Create a reference to the cause document and update it
+                            const causeRef = doc(db, "causes", causeId);
+                            batch.update(causeRef, {
+                                raisedAmount: increment(amount)
+                            });
+                            
+                            // 3. Commit the batch
+                            await batch.commit();
+                            
+                            document.getElementById('success-modal').classList.remove('hidden');
+                            donationForm.reset();
+                            amountBtns.forEach(b => b.classList.remove('bg-teal-500', 'text-white'));
+                            selectedAmount = 0;
+
+                        } catch (error) {
+                            console.error("Error writing batch: ", error);
+                            alert('Donation successful, but there was an error recording it. Please contact support.');
+                        } finally {
+                            donateBtn.disabled = false;
+                            donateBtnText.textContent = 'Donate Now';
+                            loadingSpinner.classList.add('hidden');
+                        }
+                    },
+                    "prefill": { "name": name, "email": email },
+                    "theme": { "color": "#0D9488" },
+                    "modal": {
+                        "ondismiss": function() {
+                            console.log('Checkout form closed');
+                            donateBtn.disabled = false;
+                            donateBtnText.textContent = 'Donate Now';
+                            loadingSpinner.classList.add('hidden');
+                        }
+                    }
+                };
+                
+                const rzp1 = new Razorpay(options);
+                rzp1.on('payment.failed', function (response){
+                        alert(`Payment failed. Error: ${response.error.description}`);
+                        console.error(response.error);
+                        donateBtn.disabled = false;
+                        donateBtnText.textContent = 'Donate Now';
+                        loadingSpinner.classList.add('hidden');
+                });
+
+                rzp1.open();
+            });
+
+            document.getElementById('close-modal-btn').addEventListener('click', () => {
+                document.getElementById('success-modal').classList.add('hidden');
+            });
+
+            setupCausesListener();
+        });
+    </script>
+</body>
+</html>
+
