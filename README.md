@@ -61,7 +61,7 @@ Step 1: Get the Code
 
 Clone this repository to your local machine:
 
-git clone [https://github.com/your-username/samarthan-gateway.git](https://github.com/your-username/samarthan-gateway.git)
+git clone [https://github.com/your-username/samarthan-gateway.git](https://github.com/D-D-Aditya/samarthan-gateway.git)
 cd samarthan-gateway
 
 
