@@ -99,11 +99,25 @@ service cloud.firestore {
 
     // Rules for the 'causes' collection
     match /causes/{causeId} {
-      // Anyone can read the causes.
+      // Anyone can read the causes to see them on the page.
       allow read: if true;
 
-      // Only a logged-in admin can create, delete, or update a cause.
-      allow create, delete, update: if request.auth != null;
+      // Only a logged-in admin can create or delete a cause.
+      allow create, delete: if request.auth != null;
+
+      // Allow updates under two conditions:
+      allow update: if
+        // 1. The user is a logged-in admin (can change anything).
+        request.auth != null ||
+        // 2. OR the user is public and is ONLY incrementing the raisedAmount.
+        (
+          request.auth == null &&
+          request.resource.data.raisedAmount > resource.data.raisedAmount &&
+          request.resource.data.title == resource.data.title &&
+          request.resource.data.description == resource.data.description &&
+          request.resource.data.goalAmount == resource.data.goalAmount &&
+          request.resource.data.isActive == resource.data.isActive
+        );
     }
 
     // Rules for the 'donations' collection
@@ -113,7 +127,7 @@ service cloud.firestore {
 
       // Only a logged-in admin can read the donation records.
       allow read: if request.auth != null;
-      
+
       // Nobody can ever change or delete a donation record once it's made.
       allow update, delete: if false;
     }
