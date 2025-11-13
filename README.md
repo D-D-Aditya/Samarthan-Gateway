@@ -94,7 +94,7 @@ Open index.html, find the // TODO: PASTE YOUR RAZORPAY KEY ID HERE section, and 
 Step 4: Set Firestore Security Rules
 
 This is the most important step for security. In your Firebase Firestore "Rules" tab, paste the following rules and Publish them.
-
+`````
 rules_version = '2';
 service cloud.firestore {
   match /databases/{database}/documents {
@@ -121,7 +121,7 @@ service cloud.firestore {
     }
   }
 }
-
+`````
 
 
 Step 5: Deploy the Website
@@ -130,18 +130,21 @@ This project is set up to be deployed on Firebase Hosting.
 
 Install Firebase Tools:
 
+`````
 npm install -g firebase-tools
-
+`````
 
 Log in:
 
+`````
 firebase login
-
+`````
 
 Initialize Firebase (in your project folder):
 
+`````
 firebase init
-
+`````
 
 Select Hosting.
 
@@ -153,8 +156,9 @@ Configure as a single-page app? No.
 
 Deploy:
 
+`````
 firebase deploy
-
+`````
 
 Firebase will give you a live URL (e.g., https://your-project.web.app). Your site is now live!
 
