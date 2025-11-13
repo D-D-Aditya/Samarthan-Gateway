@@ -122,47 +122,112 @@ service cloud.firestore {
 `````
 
 
-#### Step 5: Deploy the Website
+#### Step 5: How to Deploy Your Website to Firebase Hosting
 
-This project is set up to be deployed on Firebase Hosting.
+This guide will walk you through the entire process of taking your index.html and admin_dashboard.html files and putting them on a live, secure website.
 
-Create a saperate folder let's say 'Samartangateway' 
-then
-Open CMD and go on the location of your new created folder
+**Step A: Install the Necessary Tools**
 
-Install Firebase Tools:
+Before you can deploy, you need to install the tools that allow your computer to talk to Firebase.
+
+Install Node.js: If you don't already have it, go to the official Node.js website and download the "LTS" (Long-Term Support) version. This package also includes npm (Node Package Manager), which you will need.
+
+Install Firebase CLI: Once Node.js is installed, open your computer's command prompt (CMD or PowerShell on Windows, Terminal on Mac/Linux) and run the following command. This will install the Firebase Command Line Interface (CLI) globally on your machine.
 
 `````
 npm install -g firebase-tools
 `````
 
-Log in:
+**Step B: Organize Your Project Files**
+
+This is the most important step to avoid the errors.
+
+Create a new, empty folder on your computer. Name it something clear, like samarthan-gateway-project.
+
+Inside this folder, create another folder and name it exactly public.
+
+Move your index.html and admin_dashboard.html files inside the public folder.
+
+Your final folder structure must look like this:
+
+`````
+samarthan-gateway-project/
+└── public/
+    ├── index.html
+    └── admin_dashboard.html
+`````
+
+**Step C: Connect Your Project to Firebase**
+
+Now, we'll use the command line to link your project folder to your Firebase account.
+
+Open your command prompt or terminal.
+
+Navigate to your main project folder. Use the cd (change directory) command. For example, if your folder is on your Desktop, you might type:
+
+`````
+cd Desktop/samarthan-gateway-project
+`````
+
+Log in to Firebase. Run this command. A browser window will open, asking you to log in to your Google account and grant permissions.
 
 `````
 firebase login
 `````
 
-Initialize Firebase (in your project folder):
+Initialize the Firebase project. This is the main setup step. Run the following command inside your samarthan-gateway-project folder:
 
 `````
 firebase init
 `````
 
-Select Hosting.
+You will be asked a series of questions. Answer them exactly like this:
 
-Choose "Use an existing project" and select the project you created.
+"Are you ready to proceed? (Y/n)"
 
-Set your public directory to public. (This is important, as the code files are in a folder named public).
+Type Y and press Enter.
 
-Configure as a single-page app? No.
+"Which Firebase features do you want to set up?"
 
-Deploy:
+Use the arrow keys to move down to "Hosting: Configure files for Firebase Hosting..."
+
+Press the Spacebar to select it.
+
+Press Enter.
+
+"Please select an option:"
+
+Choose "Use an existing project" and press Enter.
+
+"Select a default Firebase project:"
+
+A list of your Firebase projects will appear. Use the arrow keys to select your "Samarthan Gateway" project and press Enter.
+
+"What do you want to use as your public directory?"
+
+This is the most critical question. Type public and press Enter. (This tells Firebase that your website files are in the "public" folder you created in Step 2).
+
+"Configure as a single-page app (rewrite all urls to /index.html)?"
+
+Type N and press Enter. (This is important, otherwise your admin_dashboard.html page won't work).
+
+"Set up automatic builds and deploys with GitHub?"
+
+Type N and press Enter.
+
+Firebase will now create two new files in your samarthan-gateway-project folder (.firebaserc and firebase.json). Your project is now successfully initialized!
+
+**Step D: Deploy Your Website**
+
+You are now ready to put your website on the internet.
+
+In your command prompt (make sure you are still in the samarthan-gateway-project folder), run this one simple command:
 
 `````
 firebase deploy
 `````
 
-Firebase will give you a live URL (e.g., https://your-project.web.app). Your site is now live!
+Firebase will start uploading your files. After a few seconds, it will be complete. You will see a "Deploy complete!" message and, most importantly, a Hosting URL. It will look something like https://samarthangateway.web.app. (url maybe different for you)
 
 Project Context
 
