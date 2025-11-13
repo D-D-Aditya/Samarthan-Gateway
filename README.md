@@ -115,12 +115,13 @@ service cloud.firestore {
 
       // Only a logged-in admin can read the donation records.
       allow read: if request.auth != null;
-
+      
       // Nobody can ever change or delete a donation record once it's made.
       allow update, delete: if false;
     }
   }
 }
+
 
 
 Step 5: Deploy the Website
