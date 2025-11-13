@@ -126,6 +126,9 @@ service cloud.firestore {
 
 This project is set up to be deployed on Firebase Hosting.
 
+create a saperate folder let's say 'Samartangateway'
+Open CMD and go on the location of your new created folder
+
 Install Firebase Tools:
 
 `````
