@@ -29,8 +29,6 @@ Public Donation Page
 
 Admin Dashboard & Analytics
 
-
-
 Technologies Used
 
 Frontend: HTML5, Tailwind CSS, Vanilla JavaScript (ES6+)
@@ -45,7 +43,7 @@ Hosting: Firebase Hosting
 
 Payments: Razorpay Payment Gateway (Test Mode)
 
-Setup and Installation
+*Setup and Installation*
 
 To run this project, you will need to set up your own Firebase and Razorpay accounts.
 
