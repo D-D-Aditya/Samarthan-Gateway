@@ -43,11 +43,11 @@ Hosting: Firebase Hosting
 
 Payments: Razorpay Payment Gateway (Test Mode)
 
-##Setup and Installation
+## Setup and Installation
 
 To run this project, you will need to set up your own Firebase and Razorpay accounts.
 
-###Prerequisites:
+### Prerequisites:
 
 Node.js (which includes npm)
 
@@ -55,7 +55,7 @@ A Firebase Account (free "Spark" plan)
 
 A Razorpay Account (free "Test Mode" access)
 
-####Step 1: Get the Code
+#### Step 1: Get the Code
 
 Clone this repository to your local machine:
 
@@ -63,7 +63,7 @@ git clone [https://github.com/D-D-Aditya/samarthan-gateway.git](https://github.c
 cd samarthan-gateway
 
 
-####Step 2: Firebase Setup
+#### Step 2: Firebase Setup
 
 Create a Project: Go to the Firebase Console and create a new project.
 
@@ -77,7 +77,7 @@ Enable Authentication: Go to "Authentication," click "Sign-in method," and enabl
 
 Create Admin User: In the "Authentication" > "Users" tab, manually add your first admin user (your email and a password). This is how you will log in to the admin dashboard.
 
-####Step 3: Razorpay Setup
+#### Step 3: Razorpay Setup
 
 Log in to your Razorpay Dashboard.
 
@@ -89,7 +89,7 @@ Copy the Key ID (it looks like rzp_test_...).
 
 Open index.html, find the // TODO: PASTE YOUR RAZORPAY KEY ID HERE section, and paste your Key ID.
 
-####Step 4: Set Firestore Security Rules
+#### Step 4: Set Firestore Security Rules
 
 This is the most important step for security. In your Firebase Firestore "Rules" tab, paste the following rules and Publish them.
 `````
@@ -122,7 +122,7 @@ service cloud.firestore {
 `````
 
 
-####Step 5: Deploy the Website
+#### Step 5: Deploy the Website
 
 This project is set up to be deployed on Firebase Hosting.
 
