@@ -59,9 +59,13 @@ A Razorpay Account (free "Test Mode" access)
 
 Clone this repository to your local machine:
 
+`````
 git clone [https://github.com/D-D-Aditya/samarthan-gateway.git](https://github.com/D-D-Aditya/samarthan-gateway.git)
-cd samarthan-gateway
+`````
 
+`````
+cd samarthan-gateway
+`````
 
 #### Step 2: Firebase Setup
 
